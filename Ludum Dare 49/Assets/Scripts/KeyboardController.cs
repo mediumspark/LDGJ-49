@@ -26,11 +26,11 @@ public class KeyboardController : ICommand
 
     public void Execute()
     {
-        float jumpForce = 50f;
+        float jumpForce = 250f;
         float moveStep = 4.0f;
         Rigidbody2D rigidbody = _player.GetComponent<Rigidbody2D>();
         Player player = _player.GetComponent<Player>();
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space) && !player.IsJumping)
+        if((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)) && !player.IsJumping)
         {
             rigidbody.AddForce(new Vector2(0, jumpForce)); //This is an obvious place holder
             player.IsJumping = true;

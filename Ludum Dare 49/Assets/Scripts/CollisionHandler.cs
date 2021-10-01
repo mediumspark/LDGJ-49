@@ -30,7 +30,7 @@ namespace Assets.Scripts
             _player = GameObject.Find("Player").GetComponent<Player>();
         }
 
-        public void OnCollisonEnter(Collision col)
+        public void OnCollisonEnter(Collision2D col)
         {
             GameObject obj = col.gameObject;
             if(obj.tag.ToLower() == "ground")
