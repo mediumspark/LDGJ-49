@@ -49,6 +49,11 @@ namespace Assets.Scripts
             _sound["title"] = Resources.Load<AudioClip>(@"Music\fire");
         }
 
+        public void Stop()
+        {
+            _source.Stop();
+        }
+
         public void Play(string level)
         {
             _source.Stop();

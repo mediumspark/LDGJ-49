@@ -64,6 +64,21 @@ namespace Assets.Scripts
             set;
         }
 
-        private SettingsRegistry() { _lockObj = new object(); _offset = SettingsRegistry.OFFSETFLAG; PanEnabled = true; }
+        public bool DialogControls
+        {
+            get;
+            set;
+        }
+
+        public bool ControlsEnabled
+        {
+            get;
+            set;
+        }
+
+        private SettingsRegistry() { 
+            _lockObj = new object(); _offset = SettingsRegistry.OFFSETFLAG; PanEnabled = true;
+            DialogControls = false;
+        }
     }
 }

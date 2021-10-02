@@ -41,5 +41,6 @@ namespace Assets.Scripts
                 _lblHealth.color = Color.red;
             }
         }
+
     }
 }

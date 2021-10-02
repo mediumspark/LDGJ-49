@@ -13,6 +13,7 @@ public class GameOperationalDirector : MonoBehaviour
     private CameraController cameraController;
     private GameObject mainCam;
     private IEnumerator routine;
+    private IHasText _focusedDialogCharacter;
     void Start()
     {
 
@@ -21,6 +22,13 @@ public class GameOperationalDirector : MonoBehaviour
         {
             DontDestroyOnLoad(GameObject.Find("Music"));
             SoundManager.Instance.Play("fire");
+        }
+        else if(SceneManager.GetActiveScene().name.ToLower() == "story")
+        {
+            GameObject story = GameObject.Find("Main Camera");
+            GameObject.Find("Main Camera").GetComponent<Story>().SetController(ControllerFactory.CreateController(story));
+            SoundManager.Instance.Stop();
+            _focusedDialogCharacter = GameObject.Find("Main Camera").GetComponent<Story>();
         }
 
         else
@@ -50,7 +58,7 @@ public class GameOperationalDirector : MonoBehaviour
 
     public void PlayClicked()
     {
-        SceneManager.LoadScene("TestScene2");
+        SceneManager.LoadScene("Story");
     }
 
     private IEnumerator Timer(int secs)
@@ -71,6 +79,10 @@ public class GameOperationalDirector : MonoBehaviour
         throw new NotImplementedException("Timer Expired");
     }
 
+    public void ScrollDialog()
+    {
+        _focusedDialogCharacter.ScrollText();
+    }
    /** public void TransitionCamera()
     {
         SettingsRegistry.Instance.PanEnabled = false;
