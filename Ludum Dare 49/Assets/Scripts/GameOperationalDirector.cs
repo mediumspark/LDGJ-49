@@ -7,22 +7,30 @@ using UnityEngine;
 public class GameOperationalDirector : MonoBehaviour
 {
     // Start is called before the first frame update
-    Player _player;
-    UIMananger _ui;
+    private Player _player;
+    private UIMananger _ui;
+    private CameraController cameraController;
+    private GameObject mainCam;
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _player.Controller = ControllerFactory.CreateController(GameObject.FindGameObjectWithTag("Player"));
+
+        mainCam = GameObject.Find("Main Camera");
         DontDestroyOnLoad(GameObject.Find("Music"));
         SoundManager.Instance.Play("normal");
         _ui = new UIMananger(); //Will need to change this to take loaded scene as a parameter.
-        StartCoroutine(Timer(10));
+        cameraController = new CameraController(mainCam, GameObject.Find("Player"));
+        StartCoroutine(Timer(100));
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-      
+      if(cameraController != null)
+        {
+            cameraController.PositionCamera();
+        }
     }
 
     private IEnumerator Timer(int secs)
@@ -41,6 +49,15 @@ public class GameOperationalDirector : MonoBehaviour
     private void TimerExpired()
     {
         throw new NotImplementedException("Timer Expired");
+    }
+
+    public void TransitionCamera()
+    {
+        cameraController.BeginTransition();
+        if(cameraController != null)
+        {
+            StartCoroutine(cameraController.Transition());
+        } 
     }
     
 }
