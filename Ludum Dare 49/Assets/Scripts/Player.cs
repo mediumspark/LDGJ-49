@@ -25,6 +25,13 @@ public class Player : MonoBehaviour
 
     private CollisionHandler _colHander;
 
+    private float _health;
+    public float Health
+    {
+        get { return _health; }
+        set { _health = value; }
+    }
+
     void Start()
     {
         _isJumping = false;
@@ -38,7 +45,7 @@ public class Player : MonoBehaviour
         _controller.Execute();
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         _colHander.OnCollisonEnter(collision);
     }
