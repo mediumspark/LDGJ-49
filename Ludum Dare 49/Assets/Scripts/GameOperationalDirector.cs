@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOperationalDirector : MonoBehaviour
 {
@@ -14,15 +15,27 @@ public class GameOperationalDirector : MonoBehaviour
     private IEnumerator routine;
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
-        _player.Controller = ControllerFactory.CreateController(GameObject.FindGameObjectWithTag("Player"));
 
         mainCam = GameObject.Find("Main Camera");
-        DontDestroyOnLoad(GameObject.Find("Music"));
-        SoundManager.Instance.Play("normal");
-        _ui = new UIMananger(); //Will need to change this to take loaded scene as a parameter.
-        cameraController = new CameraController(mainCam, GameObject.Find("Player"));
-        StartCoroutine(Timer(100));
+        if (SceneManager.GetActiveScene().name.ToLower() == "title")
+        {
+            DontDestroyOnLoad(GameObject.Find("Music"));
+            SoundManager.Instance.Play("fire");
+        }
+
+        else
+        {
+            _ui = new UIMananger();
+            _player = GameObject.Find("Player").GetComponent<Player>();
+            _player.Controller = ControllerFactory.CreateController(GameObject.FindGameObjectWithTag("Player"));
+
+
+
+            SoundManager.Instance.Play("normal");
+           //Will need to change this to take loaded scene as a parameter.
+            cameraController = new CameraController(mainCam, GameObject.Find("Player"));
+            StartCoroutine(Timer(100));
+        }
     }
 
     // Update is called once per frame
@@ -32,6 +45,12 @@ public class GameOperationalDirector : MonoBehaviour
         {
             cameraController.PositionCamera();
         }
+    }
+
+
+    public void PlayClicked()
+    {
+        SceneManager.LoadScene("TestScene2");
     }
 
     private IEnumerator Timer(int secs)
