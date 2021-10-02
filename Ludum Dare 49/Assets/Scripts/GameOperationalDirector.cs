@@ -11,12 +11,12 @@ public class GameOperationalDirector : MonoBehaviour
     UIMananger _ui;
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _player = GameObject.Find("Player").GetComponent<Player>();
         _player.Controller = ControllerFactory.CreateController(GameObject.FindGameObjectWithTag("Player"));
         DontDestroyOnLoad(GameObject.Find("Music"));
         SoundManager.Instance.Play("normal");
         _ui = new UIMananger(); //Will need to change this to take loaded scene as a parameter.
-        StartCoroutine(Timer(100));
+        StartCoroutine(Timer(10));
     }
 
     // Update is called once per frame
