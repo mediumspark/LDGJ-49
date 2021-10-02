@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _controller.Execute();
+       _controller.Execute();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
