@@ -46,6 +46,7 @@ namespace Assets.Scripts
         private void LoadMusic()
         {
             _sound["song1"] =Resources.Load<AudioClip>(@"Music\song1");
+            _sound["title"] = Resources.Load<AudioClip>(@"Music\fire");
         }
 
         public void Play(string level)
@@ -54,6 +55,12 @@ namespace Assets.Scripts
             if(level == "normal")
             {
                 _source.clip = _sound["song1"];
+                _source.loop = true;
+                _source.Play();
+            }
+            else
+            {
+                _source.clip = _sound["title"];
                 _source.loop = true;
                 _source.Play();
             }
