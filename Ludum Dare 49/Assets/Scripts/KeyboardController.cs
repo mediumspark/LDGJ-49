@@ -39,24 +39,12 @@ public class KeyboardController : ICommand
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             rigidbody.transform.position -= new Vector3(moveStep * Time.deltaTime, 0, 0);
-            if (!_player.GetComponent<Player>().FacingLeft)
-            {
-                _player.transform.rotation = new Quaternion(0, 180, 0, 0);
-                _player.GetComponent<Player>().FacingLeft = true;
-               GameObject.Find("Main Camera").GetComponent<GameOperationalDirector>().TransitionCamera();
-
-            }
+            _player.transform.rotation = new Quaternion(0, 180, 0, 0);
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             rigidbody.transform.position += new Vector3(moveStep * Time.deltaTime, 0, 0);
-            if (_player.GetComponent<Player>().FacingLeft)
-            { 
-                player.transform.rotation = new Quaternion(0, 0, 0, 0);
-                _player.GetComponent<Player>().FacingLeft = false;
-               GameObject.Find("Main Camera").GetComponent<GameOperationalDirector>().TransitionCamera();
-            }
-
+            _player.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
         
     }
