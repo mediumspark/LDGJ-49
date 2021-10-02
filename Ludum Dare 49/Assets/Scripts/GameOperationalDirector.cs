@@ -11,6 +11,8 @@ public class GameOperationalDirector : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _player.Controller = ControllerFactory.CreateController(GameObject.FindGameObjectWithTag("Player"));
+        DontDestroyOnLoad(GameObject.Find("Music"));
+        SoundManager.Instance.Play("normal");
     }
 
     // Update is called once per frame
