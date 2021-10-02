@@ -32,9 +32,17 @@ public class Player : MonoBehaviour
         set { _health = value; }
     }
 
+    private bool _facingLeft;
+    public bool FacingLeft
+    {
+        get { return _facingLeft; }
+        set { _facingLeft = value; }
+    }
+
     void Start()
     {
         _isJumping = false;
+        _facingLeft = false;
         _player = this.gameObject;
         _colHander = CollisionHandler.Instance;
     }
