@@ -12,12 +12,7 @@ namespace Assets.Scripts
         private GameObject _camera;
         private GameObject _player;
 
-        private CameraAngles _camAngle;
-        public CameraAngles CamAngle
-        {
-            get { return _camAngle; }
-            set { _camAngle = value; }
-        }
+       
 
         bool transitioning = false;
 
@@ -25,45 +20,45 @@ namespace Assets.Scripts
         {
             _camera = cam;
             _player = player;
+            SettingsRegistry.Instance.CamAngle = CameraAngles.NormalRight;
         }
 
         public void PositionCamera()
         {
-            if (!transitioning)
-            {
-                if (CamAngle == CameraAngles.NormalLeft)
+            
+                if (SettingsRegistry.Instance.CamAngle == CameraAngles.NormalLeft)
                 {
                     Vector3 camPos = new Vector3(_player.transform.position.x - 4.04f, 2.67f, _camera.transform.position.z);
                     _camera.transform.position = camPos;
                 }
-                else if (CamAngle == CameraAngles.NormalRight)
+                else if (SettingsRegistry.Instance.CamAngle == CameraAngles.NormalRight)
                 {
                     Vector3 camPos = new Vector3(_player.transform.position.x + 4.04f, 2.67f, _camera.transform.position.z);
                     _camera.transform.position = camPos;
                 }
-            }
+            
         }
 
-        public void BeginTransition()
+    
+   /**    public IEnumerator Transition()
         {
-            transitioning = true;
-        }
-        public IEnumerator Transition()
-        {
-            
-            float target = CamAngle == CameraAngles.NormalRight ? -4.04f : 4.04f;
-            float offset = 0f;
+            yield return new WaitForSeconds(0.001f);
+            float target = SettingsRegistry.Instance.CamAngle == CameraAngles.NormalRight ? -4.04f : 4.04f;
+            if(SettingsRegistry.Instance.Offset == SettingsRegistry.OFFSETFLAG)
+            {
+
+                SettingsRegistry.Instance.Offset = target * -1;
+            }
+          
 
             if (target > 0)
             {
-                CamAngle = CameraAngles.NormalRight;
-                while (offset < target)
+                SettingsRegistry.Instance.CamAngle = CameraAngles.NormalRight;
+                while (SettingsRegistry.Instance.Offset < target)
                 {
-                    
-                        offset += 0.05f;
-                   
-                    Vector3 camPos = new Vector3(_player.transform.position.x + offset, 2.67f, _camera.transform.position.z);
 
+                    Vector3 camPos = new Vector3(_player.transform.position.x + SettingsRegistry.Instance.Offset, 2.67f, _camera.transform.position.z);
+                    SettingsRegistry.Instance.Offset += 0.1f;
                     _camera.transform.position = camPos;
 
                     yield return new WaitForSeconds(0.000001f);
@@ -71,21 +66,23 @@ namespace Assets.Scripts
             }
             else
             {
-                CamAngle = CameraAngles.NormalLeft;
-                while (offset > target)
+                SettingsRegistry.Instance.CamAngle = CameraAngles.NormalLeft;
+                while (SettingsRegistry.Instance.Offset > target)
                 {
 
-                    offset -= 0.05f;
+                    Vector3 camPos = new Vector3(_player.transform.position.x + SettingsRegistry.Instance.Offset, 2.67f, _camera.transform.position.z);
 
-                    Vector3 camPos = new Vector3(_player.transform.position.x + offset, 2.67f, _camera.transform.position.z);
+                    SettingsRegistry.Instance.Offset -= 0.1f;
 
                     _camera.transform.position = camPos;
 
                     yield return new WaitForSeconds(0.000001f);
                 }
             }
-            transitioning = false;
-        }
+            SettingsRegistry.Instance.Offset = SettingsRegistry.OFFSETFLAG;
+            SettingsRegistry.Instance.PanEnabled = true;
+            SettingsRegistry.Instance.TransitionCamera = false;
+        } **/
 
     }
 }

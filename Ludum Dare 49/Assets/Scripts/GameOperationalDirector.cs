@@ -11,6 +11,7 @@ public class GameOperationalDirector : MonoBehaviour
     private UIMananger _ui;
     private CameraController cameraController;
     private GameObject mainCam;
+    private IEnumerator routine;
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
@@ -51,13 +52,13 @@ public class GameOperationalDirector : MonoBehaviour
         throw new NotImplementedException("Timer Expired");
     }
 
-    public void TransitionCamera()
+   /** public void TransitionCamera()
     {
-        cameraController.BeginTransition();
+        SettingsRegistry.Instance.PanEnabled = false;
         if(cameraController != null)
         {
             StartCoroutine(cameraController.Transition());
         } 
     }
-    
+    **/
 }
