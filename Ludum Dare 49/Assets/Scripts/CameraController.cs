@@ -28,12 +28,12 @@ namespace Assets.Scripts
             
                 if (SettingsRegistry.Instance.CamAngle == CameraAngles.NormalLeft)
                 {
-                    Vector3 camPos = new Vector3(_player.transform.position.x - 4.04f, 2.67f, _camera.transform.position.z);
+                    Vector3 camPos = new Vector3(_player.transform.position.x - 3.02f, 2.67f, _camera.transform.position.z);
                     _camera.transform.position = camPos;
                 }
                 else if (SettingsRegistry.Instance.CamAngle == CameraAngles.NormalRight)
                 {
-                    Vector3 camPos = new Vector3(_player.transform.position.x + 4.04f, 2.67f, _camera.transform.position.z);
+                    Vector3 camPos = new Vector3(_player.transform.position.x + 3.02f, 2.67f, _camera.transform.position.z);
                     _camera.transform.position = camPos;
                 }
             
